@@ -16,7 +16,4 @@ module "network" {
 
 }
 
-module "instance-group" {
-  source = "./modules/instance-group"
-}
 
