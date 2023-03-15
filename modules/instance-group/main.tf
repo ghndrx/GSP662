@@ -52,7 +52,8 @@ resource "google_compute_instance_group_manager" "fancy_fe_mig" {
   
   depends_on = [
     google_compute_http_health_check.fancy_fe_hc,
-    google_compute_backend_service.fancy_frontend_service
+    google_compute_backend_service.fancy_backend_service,
+    google_compute_target_pool.fancy_target_pool_fe,
   ]
 }
 
@@ -85,7 +86,8 @@ resource "google_compute_instance_group_manager" "fancy_be_mig" {
   
   depends_on = [
     google_compute_http_health_check.fancy_be_hc,
-    google_compute_backend_service.fancy_backend_service
+    google_compute_backend_service.fancy_backend_service,
+    google_compute_target_pool.fancy_target_pool_be,
   ]
 }
 
