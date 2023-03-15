@@ -9,7 +9,7 @@ resource "google_compute_instance_group_manager" "fancy_fe_mig" {
     google_compute_target_pool.fancy_target_pool.self_link
   ]
   
-  zone = "us-central1-a"
+  zone = "us-central1-f"
   
   update_policy {
     type = "PROACTIVE"
@@ -37,7 +37,7 @@ resource "google_compute_instance_group_manager" "fancy_be_mig" {
     google_compute_target_pool.fancy_target_pool.self_link
   ]
   
-  zone = "us-central1-a"
+  zone = "us-central1-f"
   
   update_policy {
     type = "PROACTIVE"

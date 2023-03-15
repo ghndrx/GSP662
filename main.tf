@@ -10,3 +10,29 @@ module "instance" {
   source = "./modules/instances"
   fancy_store_name = module.storage.fancy_store_name
 }
+
+module "healthchecks" {
+  source = "./modules/network/healthchecks"
+}
+
+module "firewall" {
+  source = "./modules/network/firewall"
+  
+}
+
+module "loadbalancer" {
+  source = "./modules/network/loadbalancer"
+}
+
+module "network" {
+  source = "./modules/network"
+
+}
+
+module "instance-group" {
+  source = "./modules/instance-group"
+}
+
+module "autoscale" {
+  source = "./modules/autoscale"
+}
