@@ -2,12 +2,13 @@
 
 module "network" {
   source = "../network"
+  project = var.project_id
 }
 
 resource "google_compute_instance" "backend" {
   name         = "backend"
   machine_type = "f1-micro"
-  zone         = "${var.region}-b"
+  zone         = "${var.region}-f"
 
   boot_disk {
     initialize_params {
