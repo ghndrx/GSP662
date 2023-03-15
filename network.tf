@@ -1,10 +1,3 @@
-module "network" {
-  source      = "./modules/network"
-  project_id  = var.project_id
-  region      = var.region
-  network_cidr= var.network_cidr
-}
-
 resource "google_compute_instance" "backend" {
   name         = "backend"
   machine_type = "n1-standard-1"

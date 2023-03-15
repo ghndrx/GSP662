@@ -2,22 +2,11 @@ terraform {
   required_version = ">= 0.14.0"
 }
 
-variable "project_id" {
-  description = "The ID of the GCP project."
-}
-
-variable "region" {
-  description = "The region to create resources in."
-  default = "us-central1"
-}
-
-provider "google" {
-  project = var.project_id
-  region  = var.region
-}
-
 module "network" {
-  source = "./modules/network"
+  source      = "./modules/network"
+  project_id  = var.project_id
+  region      = var.region
+  network_cidr= var.network_cidr
 }
 
 module "backend" {
