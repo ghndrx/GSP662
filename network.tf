@@ -1,5 +1,5 @@
 module "network" {
-  source      = "./network"
+  source      = "./modules/network"
   project_id  = var.project_id
   region      = var.region
   network_cidr= var.network_cidr
