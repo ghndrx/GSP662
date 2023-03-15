@@ -40,3 +40,22 @@ resource "google_compute_region_instance_group_manager_rolling_update" "fancy_fe
   max_surge = 1
   max_unavailable = 1
 }
+
+
+# ENABLE CDN
+resource "google_compute_backend_service" "fancy_fe_frontend" {
+  name = "fancy-fe-frontend"
+  port_name = "frontend"
+  protocol = "HTTP"
+  load_balancing_scheme = "INTERNAL_SELF_MANAGED"
+
+  backend {
+    group = google_compute_instance_group_manager.fancy_fe_mig.self_link
+  }
+
+  health_checks = [
+    google_compute_http_health_check.fancy_fe_frontend_hc.self_link
+  ]
+
+  enable_cdn = true
+}
