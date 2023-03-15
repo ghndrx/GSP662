@@ -4,6 +4,10 @@ resource "google_compute_region_autoscaler" "fancy_fe_autoscaler" {
   cooldown_period_sec = 60
   load_balancing_utilization_target = 0.6
   max_replicas = 2
+
+  depends_on = [
+    module.instance-group.fancy_fe_mig
+  ]
 }
 
 resource "google_compute_region_autoscaler" "fancy_be_autoscaler" {
@@ -12,4 +16,7 @@ resource "google_compute_region_autoscaler" "fancy_be_autoscaler" {
   cooldown_period_sec = 60
   load_balancing_utilization_target = 0.6
   max_replicas = 2
+  depends_on = [
+    module.instance-group.fancy_be_mig
+  ]
 }
