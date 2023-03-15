@@ -10,7 +10,7 @@ provider "google" {
 }
 
 module "network" {
-  source     = "./network"
+  source     = "./modules/network"
   project_id = var.project_id
   region     = var.region
   network    = var.network
@@ -18,11 +18,11 @@ module "network" {
 }
 
 module "backend" {
-  source = "./backend"
+  source = "./modules/backend"
 }
 
 module "frontend" {
-  source        = "./frontend"
+  source        = "./modules/frontend"
   project_id    = var.project_id
   region        = var.region
   instance_type = var.instance_type
