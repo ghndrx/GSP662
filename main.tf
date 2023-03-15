@@ -11,8 +11,12 @@ module "network" {
 
 module "backend" {
   source = "./modules/backend"
-  startup_script = module.network.startup_script
+  sa_email = "example@project-id.iam.gserviceaccount.com"
+  image_name = "backend-image"
+  project_id = var.project_id
+  region = var.region
 }
+
 
 module "nat_gateway" {
   source = "./modules/network/nat_gateway"
