@@ -8,16 +8,7 @@ variable "region" {
   description = "The region to deploy resources into"
 }
 
-variable "network_cidr" {
+variable "zone" {
   type        = string
-  description = "The CIDR block for the VPC network"
+  description = "The zone in which resource to be deployed"
 }
-
-
-variable "network_name" {}
-
-variable "subnet_name" {}
-
-variable "firewall_name" {}
-
-

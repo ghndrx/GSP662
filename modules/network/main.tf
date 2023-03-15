@@ -1,41 +1,59 @@
-# Define VPC
-resource "google_compute_network" "vpc_network" {
-  name                    = var.vpc_name
-  project                 = var.project_id
-  auto_create_subnetworks = false
+resource "google_compute_backend_service" "fancy_backend_service" {
+  name = "fancy-backend-service"
+  protocol = "HTTP"
+  
+  backend {
+    group = google_compute_instance_group_manager.fancy_be_mig.self_link
+  }
+  
+  health_checks = [
+    google_compute_http_health_check.fancy_be_hc.self_link
+  ]
+  
+  port_name = "orders"
+  
+  named_port {
+    name = "orders"
+    port = "8081"
+  }
+  
+  named_port {
+    name = "products"
+    port = "8082"
+  }
 }
 
-# Define subnetwork
-resource "google_compute_subnetwork" "vpc_subnet" {
-  name          = var.subnet_name
-  ip_cidr_range = var.subnet_cidr_range
-  region        = var.region
-  network       = google_compute_network.vpc_network.self_link
+resource "google_compute_backend_service" "fancy_frontend_service" {
+  name = "fancy-frontend-service"
+  protocol = "HTTP"
+  
+  backend {
+    group = google_compute_instance_group_manager.fancy_fe_mig.self_link
+  }
+  
+  health_checks = [
+    google_compute_http_health_check.fancy_fe_hc.self_link
+  ]
+  
+  port_name = "frontend"
+  
+  named_port {
+    name = "frontend"
+    port = "8080"
+  }
 }
 
-# Define firewall rule for frontend instances
-resource "google_compute_firewall" "frontend_firewall" {
-  name    = "allow-frontend"
-  network = google_compute_network.vpc_network.self_link
+resource "google_compute_firewall" "allow_health_check" {
+  name    = "allow-health-check"
+  network = "default"
 
   allow {
     protocol = "tcp"
-    ports    = ["8080"]
+    ports    = ["8080-8081"]
   }
 
-  target_tags = ["frontend"]
+  source_ranges = [
+    "130.211.0.0/22",
+    "35.191.0.0/16"
+  ]
 }
-
-# Define firewall rule for backend instances
-resource "google_compute_firewall" "backend_firewall" {
-  name    = "allow-backend"
-  network = google_compute_network.vpc_network.self_link
-
-  allow {
-    protocol = "tcp"
-    ports    = ["8081-8082"]
-  }
-
-  target_tags = ["backend"]
-}
-
