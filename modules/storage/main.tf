@@ -13,6 +13,7 @@ resource "google_storage_bucket_object" "startup_script" {
   depends_on = [google_storage_bucket.fancy_store]
 
 }
+
 output "fancy_store_name" {
   value = google_storage_bucket.fancy_store.name
 }
