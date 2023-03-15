@@ -18,7 +18,7 @@ module "network" {
 
 module "storage" {
   source = "./modules/storage"
-  project_id=var.project_id
+  project_id = var.project_id
 }
 
 module "autoscale" {
