@@ -7,6 +7,8 @@ resource "google_compute_firewall" "fe_firewall" {
     ports    = ["8080"]
   }
 
+  source_ranges = ["0.0.0.0/0"]
+
   target_tags = ["frontend"]
 }
 
@@ -18,6 +20,8 @@ resource "google_compute_firewall" "be_firewall" {
     protocol = "tcp"
     ports    = ["8081-8082"]
   }
+
+  source_ranges = ["0.0.0.0/0"]
 
   target_tags = ["backend"]
 }
