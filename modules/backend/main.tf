@@ -1,8 +1,5 @@
 # modules/backend/main.tf
 
-variable "project_id" {}
-variable "region" {}
-
 module "network" {
   source = "../network"
 }
