@@ -5,7 +5,7 @@ resource "google_compute_instance" "backend" {
   tags         = ["backend"]
   
     metadata = {
-        startup-script-url = "gs://${fancy_store_name}/startup-script.sh"
+        startup-script-url = "gs://${module.instances.fancy_store_name}/startup-script.sh"
     } 
 
   
@@ -27,7 +27,7 @@ resource "google_compute_instance" "frontend" {
   tags         = ["frontend"]
   
   metadata = {
-    startup-script-url = "gs://${fancy_store_name}/startup-script.sh"
+    startup-script-url = "gs://${module.instances.fancy_store_name}/startup-script.sh"
   }
   
   boot_disk {
