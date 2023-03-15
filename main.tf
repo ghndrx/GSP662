@@ -6,11 +6,7 @@ module "storage" {
   
 }
 
-output "fancy_store_name" {
-  value = module.storage.fancy_store_name
-}
-
 module "instance" {
   source = "./modules/instances"
-
+  fancy_store_name = module.storage.fancy_store_name
 }
