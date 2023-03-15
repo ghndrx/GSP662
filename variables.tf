@@ -20,19 +20,4 @@ variable "subnet_name" {}
 
 variable "firewall_name" {}
 
-module "network" {
-  source  = "./modules/network"
-  project_id = var.project_id
-  region = var.region
-  network_name = var.network_name
-  subnet_name = var.subnet_name
-}
 
-module "firewall" {
-  source  = "./modules/firewall"
-  project_id = var.project_id
-  region = var.region
-  network_name = module.network.network_name
-  subnet_name = module.network.subnet_name
-  firewall_name = var.firewall_name
-}
