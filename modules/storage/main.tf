@@ -9,7 +9,7 @@ resource "google_storage_bucket_object" "startup_script" {
   bucket = google_storage_bucket.fancy_store.name
   source = "${path.module}/startup-script.sh"
   content_type = "text/plain"
-}
-variable "project_id" {
   
+  depends_on = [google_storage_bucket.fancy_store]
+
 }
