@@ -1,3 +1,32 @@
+resource "google_compute_target_pool" "fancy_target_pool_fe" {
+  name = "fancy-target-pool"
+
+  instances = [
+    google_compute_instance.fancy_fe_instance1.self_link,
+    google_compute_instance.fancy_fe_instance2.self_link,
+  ]
+
+  health_checks = [
+    google_compute_http_health_check.fancy_fe_hc.self_link,
+  ]
+
+  session_affinity = "CLIENT_IP"
+}
+resource "google_compute_target_pool" "fancy_target_pool_be" {
+  name = "fancy-target-pool"
+
+  instances = [
+    google_compute_instance.fancy_be_instance1.self_link,
+    google_compute_instance.fancy_be_instance2.self_link,
+  ]
+
+  health_checks = [
+    google_compute_http_health_check.fancy_be_hc.self_link,
+  ]
+
+  session_affinity = "CLIENT_IP"
+}
+
 
 resource "google_compute_instance_group_manager" "fancy_fe_mig" {
   name = "fancy-fe-mig"
@@ -6,7 +35,7 @@ resource "google_compute_instance_group_manager" "fancy_fe_mig" {
   target_size = 2
   
   target_pools = [
-    google_compute_target_pool.fancy_target_pool.self_link
+    google_compute_target_pool.fancy_target_pool_fe.self_link
   ]
   
   zone = "us-central1-f"
@@ -34,7 +63,7 @@ resource "google_compute_instance_group_manager" "fancy_be_mig" {
   target_size = 2
   
   target_pools = [
-    google_compute_target_pool.fancy_target_pool.self_link
+    google_compute_target_pool.fancy_target_pool_be.self_link
   ]
   
   zone = "us-central1-f"
