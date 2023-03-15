@@ -19,7 +19,7 @@ resource "google_compute_instance" "backend" {
     network = "default"
        access_config {
       // Assign a public (external) IP address to the instance
-        nat_ip = "ephemeral"
+       
     }
   }
 }
@@ -44,7 +44,7 @@ resource "google_compute_instance" "frontend" {
     network = "default"
        access_config {
       // Assign a public (external) IP address to the instance
-        nat_ip = "ephemeral"
+        
     }
   }
 }
