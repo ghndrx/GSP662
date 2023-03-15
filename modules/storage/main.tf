@@ -10,3 +10,6 @@ resource "google_storage_bucket_object" "startup_script" {
   source = "${path.module}/startup-script.sh"
   content_type = "text/plain"
 }
+variable "project_id" {
+  
+}
