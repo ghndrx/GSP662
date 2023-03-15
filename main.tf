@@ -33,6 +33,3 @@ module "instance-group" {
   source = "./modules/instance-group"
 }
 
-module "autoscale" {
-  source = "./modules/autoscale"
-}
