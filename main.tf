@@ -1,5 +1,9 @@
 # Module Configuration
 
+module "compute_enable"{
+  source = "./modules/compute_enable"
+}
+
 module "storage" {
   source = "./modules/storage"
   project_id = var.project_id
