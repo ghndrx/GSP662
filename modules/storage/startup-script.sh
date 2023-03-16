@@ -34,7 +34,7 @@ stderr_logfile=syslog
 EOF
 supervisorctl reread
 supervisorctl update
-git clone https://github.com/googlecodelabs/monolith-to-microservices.git
+git clone https://github.com/googlecodelabs/monolith-to-microservices.git /fancy-store
 cd ~/monolith-to-microservices
 ./setup.sh
 cd microservices
