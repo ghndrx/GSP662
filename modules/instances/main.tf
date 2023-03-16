@@ -14,7 +14,11 @@ resource "google_compute_instance" "backend" {
       image = "debian-cloud/debian-10"
     }
   }
-
+  service_account {
+    // Use the default service account
+    email = "default"
+    scopes = ["cloud-platform"]
+  }
   network_interface {
     network = "default"
        access_config {
@@ -39,7 +43,11 @@ resource "google_compute_instance" "frontend" {
       image = "debian-cloud/debian-10"
     }
   }
-
+  service_account {
+    // Use the default service account
+    email = "default"
+    scopes = ["cloud-platform"]
+  }
   network_interface {
     network = "default"
        access_config {
